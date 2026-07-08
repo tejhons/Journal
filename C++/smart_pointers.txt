@@ -1,0 +1,62 @@
+SMART POINTERS
+==========================================================================
+Smart pointers are a modern solution to managing dynamic memory safely and
+efficiently in C++. 
+
+- Unlike raw pointers created by new and erased by delete, we can use smart
+  pointers to automatically manage memory deallocation, helping us prevent
+memory leaks and improve code safety.
+
+
+HOW TO use unique_ptr for exclusive ownership:
+
+std::unique_ptr<int> ptr = std::make_unique<int>(11);
+
+//BELOW, is How to assign it to a class->    SomeClass(int a, char b, string c):
+
+std::unique_pointer<SomeClass>(12, 'm', "hello");
+
+===========================================================================
+
+While we use unique_ptr for exclusive ownership, we can use shared_ptr when we
+need multiple pointers to manage the same resource. This is particularly
+useful in more complex programs.
+
+When we work with shared_ptr: We can have multiple shared_ptrs pointing to the same resource. This helps
+us when multiple parts of our program need access to the same object:
+
+// Creates a shared_ptr managing an integer with a value of 30
+std::shared_ptr<int> ptr1 = std::make_shared<int>(30);
+
+// ptr2 now shares ownership with ptr1
+std::shared_ptr<int> ptr2 = ptr1;  
+
+Rely on REFERENCE COUNTING to track how many shared_ptr's share ownership of
+the resource by using the .use_count() method
+
+e.g.:
+std::cout << "Reference count: " << ptr1.use_count() << "\n";
+
+Can also reassign shared_ptr's with .reset()
+
+Shared pointers are powerful but can also introduce performance cost due to
+its reference counting system running in the background.
+============================================================================
+
+Use a weak_ptr when dealing with shared_pointers to provide a reference that
+doesn't increase the reference count of the objects they're pointing to.
+Allows objects to be deallocated when the last owning shared_ptr goes out of
+scope. 
+
+- Important in situations where shared ownership can lead to memory leaks
+============================================================================
+SETTING A POINTER = nullptr after deleting it prevents dangling pointers in
+memory.
+
+int* ptr = new int(42);
+delete ptr;
+ptr = nullptr;  // Now ptr is safely set to nullptr and won't point to invalid
+memory
+============================================================================
+
+ 

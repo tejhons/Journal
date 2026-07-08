@@ -4,4 +4,13 @@
 - make public or private in .hppfile, classes, and init variables/funcs
 - datatype name() const {} for read only functions
 - mutable keyword to make variables accessible even in read only functions
-- 
+
+- use Dot notation to access members or variables of an object.
+- Use Arrow operator to access members of an object through a pointer.
+e.g.:
+
+BankAccount account;
+account.getBalance(); //Dot-notation
+
+BankAccount* accountPtr = &account;
+accountPtr -> getBalance(); //Arrow-Op 
