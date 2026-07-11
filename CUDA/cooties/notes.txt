@@ -41,4 +41,32 @@ side note: instead of sum.begin(), you could use std::back_inserter(sum) which i
 overflowing the memory if not enough space (improve safety).
 _______________________________________________________________________________________.NEXT
 
-//
+nvcc is the tool chain/compiler used to target both the CPU and NVIDIA GPUs.
+nvcc main.cpp -o a.out
+
+Compiling the code via nvcc isn't enough to get the GPU to perform. Explicit
+GPU execution must be programmed by the dev.
+
+Remember GPUs are accelorators not stand alone processors.
+You are responsible for establishing which code runs where. (execution space)
+By default code runs on the host side(CPU), therefore you are responsible for
+establishing what will run on the device side(GPU). This explains why
+compiling the code alone with nvcc isnt enough to communicate with the GPU.
+
+We communicate with the GPU using a wealth of libraries.
+CUDAs Thrust Library is similar to the C++ std library.
+
+Neural Networks: cuDNN
+Linear Algebra: cuBLAS
+
+Thrust algorithms e.g.:
+thrust::copy
+thrust::sort
+thrust::find
+
+Thrust containers e.g.:
+thrust::host_vector
+thrust::device_vector
+thrust::universal_vector
+
+   
