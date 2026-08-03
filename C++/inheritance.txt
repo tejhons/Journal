@@ -1,0 +1,10 @@
+class DerivedClass : public BaseClass {
+  
+  //Derived class members
+
+};
+
+//Here the colon : public BaseClass specifies that were inheriting from the
+base class.
+
+
