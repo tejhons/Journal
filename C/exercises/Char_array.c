@@ -29,10 +29,9 @@ int main()
 /* --- FUNCTION DEFINITIONS BELOW --- */
 
 /* getline: will read a line into char array s[] and return the length */
-
 int getline(char s[], int limit){
   int c, i;
-  
+   
   for (i=0; i<limit-1 && (c=getchar())!=EOF && c!='\n'; ++i) {
     s[i] = c;
   }
@@ -42,16 +41,17 @@ int getline(char s[], int limit){
     ++i;
   }
 
-  s[i] = '\0';
+  s[i] = '\0';  /* null character in C which marks the end of a string */
   return i;
 
 }
 
-/* copy: will copy char array from[] into char array to[], assuming to[] is big enough */
 
+/* copy: will copy char array from[] into char array to[], assuming to[] is big enough */
 void copy(char to[], char from[]){
   int i;
   i = 0;
 
   while ((to[i] = from[i]) != '\0') {++i;}
 }
+
