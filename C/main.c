@@ -1,8 +1,7 @@
 #include <stdio.h>
-
 #define TRACY 3
 
-int main(void)
+int main()
 {
   /*
    * File Copying / copying input to output
@@ -12,7 +11,18 @@ int main(void)
    *
    * STR: What appears to be a character on the keyboard or screen is of course,
    * like everything else, stored internally just as a bit pattern. The type char
-   * is specifically meant for storing such character but any integer type can be used.
+   * is specifically meant for storing such character but integers can also be used.
+   *
+   * If signed, -128 to 127
+   * If not signed, 0 to 255
+   * since char is typically 1 byte in a char[], anything out of range will be truncated.
+   *
+   * This is a real performance/cache-density trick since a char[] packs 4x tighter than a
+   * int[] of the same length, which matters for cache line utilization.
+   *
+   * If you want proper small range numbers without the ambiguity, <stdint.h> provides
+   * int8_t / uint8_t which are typical aliases for signed char and unsigned char -- 
+   * same storage with a clearer intent.
    *
    * We use int because copy must be big enough to hold any value that getchar returns
    * We cant use char because  copy must be big enough to hold EOF in addition to any
@@ -28,18 +38,20 @@ int main(void)
    *
    */
   
-//  int copy;
-//  copy = getchar();
+    /*
+    int copy;
+    copy = getchar();
 
-//  while (copy != EOF) {
-//    putchar(copy);
-//    copy = getchar();
-//  }
+    while (copy != EOF) {
+      putchar(copy);
+      copy = getchar();
+    }
 
-//  int concise;
-//  while ((concise = getchar()) != EOF) {
-//    putchar(concise);
-//  }
+    int concise;
+    while ((concise = getchar()) != EOF) {
+      putchar(concise);
+    }
+    */
     printf("Type something of your choice. Press Enter. Hold <Ctrl> while pressing <Z>. Hit Enter when done.\n");
     long num_copies;
     num_copies = 0;
@@ -65,6 +77,6 @@ int main(void)
       }
     }
     printf("%d lines counted.\n", num_lines);
-
-//=====================================================================================================================  
+    
+    return 0;  
 }
